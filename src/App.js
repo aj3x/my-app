@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PotentialSkills from './PotentialSkills';
+import Home from './Home';
 require('react-bootstrap');
+
+
 
 class NameForm extends Component {
   constructor(props){
@@ -42,8 +45,8 @@ class Navbar extends Component{
         text:"Home"
       },
       {
-        page:"contact",
-        text:"Contact Me"
+        page:"character",
+        text:"Character"
       },
       {
         page:"skills",
@@ -69,8 +72,75 @@ class App extends Component {
 
     this.state = {
       navpage: "skills",
+      contactIsOpen: false,
       
-      skillPage: <PotentialSkills />
+      
+      stats:[
+        {
+            id:"STR",
+            name:"Strength",
+            value:0,
+            load:0,
+            sub:[
+                ["Unarmed",0],
+                ["Melee",0],
+                ["Resistance",0],
+            ]
+        },
+        {
+            id:"SPD",
+            name:"Speed",
+            value:0,
+            sub:[
+                ["Shoot",0],
+                ["Stealth",0],
+                ["Athletics",0],
+            ]
+        },
+        {
+            id:"ADP",
+            name:"Adaptability",
+            value:0,
+            sub:[
+                ["Awareness",0],
+                ["Self-Control",0],
+                ["Scavenging",0],
+                ["Drive",0],
+                ["Criminality",0],
+            ]
+        },
+        {
+            id:"INT",
+            name:"Intelligence",
+            value:0,
+            sub:[
+                ["Foresight",0],
+                ["Research",0],
+                ["Mechanics",0],
+                ["First Aid",0],
+                ["Profession",0],
+            ]
+        },
+        {
+            id:"CHA",
+            name:"Charisma",
+            value:0,
+            sub:[
+                ["Networking",0],
+                ["Persuasion",0],
+                ["Sensitivity",0],
+                ["Deception",0],
+                ["Intimidation",0],
+                ["Leadership",0],
+            ]
+        },
+        {
+            id:"WIL",
+            name:"Will Power",
+            value:0,
+            sub:[],
+        },
+      ],
     };
   }
 
@@ -79,28 +149,11 @@ class App extends Component {
       navpage: link,
     });
   }
-
-  Nav(i){
-    switch(i){
-      case "home":return (
-        "Yay!! Welcome home!"
-      );
-  
-      case "contact":return(
-        <div>
-          <h2>Contact Us</h2>
-          <NameForm/>
-        </div>
-      );
-  
-      case "skills":return(
-        <PotentialSkills />
-      );
-  
-      default: return (
-        "Uh-oh something went wrong!"
-      );
-    }
+ 
+  contact(enable){
+    this.setState({
+      contactIsOpen: enable,
+    });
   }
   
   render() {
@@ -113,8 +166,20 @@ class App extends Component {
         <Navbar 
           onClick={link => this.handleNav(link)}
         />
-        
-        {this.Nav(this.state.navpage)}
+        <Home visible={this.state.navpage==="home"}
+        />
+        <PotentialSkills visible={this.state.navpage==="skills"} stats={this.state.stats}/>
+        <div style={this.state.contactIsOpen ? {}:{display:"none"}}>
+          You did it!
+          <a onClick={()=>this.contact(false)}>
+          <div className="noselect" style={{height:"100px",width:"100px",background:"red"}}>
+            <p>close</p>
+          </div>
+          </a>
+        </div>
+        <footer>
+          <a className="noselect" onClick={()=>this.contact(true)}>Contact Me</a>
+        </footer>
         <p className="App-intro">
         </p>
       </div>

@@ -4,6 +4,7 @@ import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 import Tooltip from 'rc-tooltip';
 import './PotentialSkills.css'
+import VisibleTab from './TabArchetype';
 // import './up.png'
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
@@ -25,80 +26,9 @@ const handle = (props) => {
   };
 
 class PotentialSkills extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            stats:[
-                {
-                    id:"STR",
-                    name:"Strength",
-                    value:0,
-                    load:0,
-                    sub:[
-                        ["Unarmed",0],
-                        ["Melee",0],
-                        ["Resistance",0],
-                    ]
-                },
-                {
-                    id:"SPD",
-                    name:"Speed",
-                    value:0,
-                    sub:[
-                        ["Shoot",0],
-                        ["Stealth",0],
-                        ["Athletics",0],
-                    ]
-                },
-                {
-                    id:"ADP",
-                    name:"Adaptability",
-                    value:0,
-                    sub:[
-                        ["Awareness",0],
-                        ["Self-Control",0],
-                        ["Scavenging",0],
-                        ["Drive",0],
-                        ["Criminality",0],
-                    ]
-                },
-                {
-                    id:"INT",
-                    name:"Intelligence",
-                    value:0,
-                    sub:[
-                        ["Foresight",0],
-                        ["Research",0],
-                        ["Mechanics",0],
-                        ["First Aid",0],
-                        ["Profession",0],
-                    ]
-                },
-                {
-                    id:"CHA",
-                    name:"Charisma",
-                    value:0,
-                    sub:[
-                        ["Networking",0],
-                        ["Persuasion",0],
-                        ["Sensitivity",0],
-                        ["Deception",0],
-                        ["Intimidation",0],
-                        ["Leadership",0],
-                    ]
-                },
-                {
-                    id:"WIL",
-                    name:"Will Power",
-                    value:0,
-                    sub:[],
-                },
-            ],
-        }
-    }//STR+(Haul), SPD, Refresh(adp), INT
     onSliderChange = (value)=>{
         console.log(value);
-        this.setState({
+        this.props.setState({
             value,
         });
     }
@@ -120,7 +50,7 @@ class PotentialSkills extends React.Component{
             );
         };
 
-        const out = this.state.stats.map((potential)=>{
+        const out = this.props.stats.map((potential)=>{
             
             var potentialPow = <Slider 
                 min={0} 
@@ -187,9 +117,10 @@ class PotentialSkills extends React.Component{
         });
 
         return(
-            <div>
-                {out}
-            </div>
+            <VisibleTab 
+                visible={this.props.visible}
+                content={out}
+            />
         );
     }
 }
