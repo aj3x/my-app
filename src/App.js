@@ -13,6 +13,7 @@ import Damage from './Health/Damage'
 require('react-bootstrap');
 
 const masterkey = "aj3xredmarketsreact";
+const pathHeader = "/myapp/";
 
 class NameForm extends Component {
   constructor(props){
@@ -46,25 +47,25 @@ class NameForm extends Component {
 
 class Navbar extends Component{
   render(){
-    const links=[
-      {
+    const links={
+      home:{
         page:"",
         text:"Home",
       },
-      {
+      character: {
         page:"character",
         text:"Character",
       },
-      {
+      skill:{
         page:"skills",
         text:"Skills",
       },
-      {
+      health:{
         page:"health",
         text:"Health",
       },
-    ];
-    const linkCode = links.map((item) => {
+    };
+    const linkCode = Object.values(links).map((item) => {
       return(
         <button key={item.page} onClick={() => this.props.onClick(item.page)}>{item.text} </button>
       );
@@ -82,9 +83,9 @@ class Navbar extends Component{
       </div>
     );
 
-    const linkRoute = links.map((item) => {
+    const linkRoute = Object.values(links).map((item) => {
       return(
-        <li key={item.page}><Link to={item.page}>{item.text}</Link></li>
+        <li key={item.page}><Link to={pathHeader + item.page}>{item.text}</Link></li>
       );
     })
     
@@ -102,8 +103,8 @@ class Navbar extends Component{
         </nav>
 
         {/* <Route path="/:id" component={Child}></Route> */}
-        <Route exact path="/" component={this.Home}/>
-        <Route path="/character" component={function (){
+        <Route exact path={pathHeader} component={this.Home}/>
+        <Route path={pathHeader+links.character.page} component={function (){
           return (<Character 
             label={this.props.label}
             currentChar={this.props.currentChar}
@@ -112,10 +113,10 @@ class Navbar extends Component{
             characters={this.props.characters}
             handleCharInfo={this.props.handleCharInfo}></Character>)
         }.bind(this)}/>
-        <Route path="/skills" component={function (){
+        <Route path={pathHeader+links.skill.page} component={function (){
           return(<PotentialSkills stats = {this.props.stats}/>)
         }.bind(this)}/>
-        <Route path="/health" component={function() {
+        <Route path={pathHeader+links.health.page} component={function() {
           return(<Damage health = {this.props.health}/>)
           }.bind(this)}/>
           </div>
