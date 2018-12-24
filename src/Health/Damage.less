@@ -1,0 +1,67 @@
+
+h1{
+    margin: 0;
+}
+// .health-box{
+//     background-color: fuchsia;
+//     width:fit-content;
+// }
+
+.test{
+    user-select: none;
+    text-align: center;
+    padding-top:auto;
+    padding-bottom:auto;
+    border: 1px solid white;
+    // padding:5px;
+    &:hover{
+        border-color: grey;
+    }
+    
+    &:active{
+        background-color: red;
+    }
+    &.selected{
+        background-color: green;
+    }
+}
+table{
+    border-collapse: collapse;
+    margin:auto;
+    padding: auto;
+    tr,td{
+        margin:0;
+        padding:0;
+        line-height: 0.9em;
+    }
+
+    img{
+        @box-size: 24px;
+        width: @box-size;
+        height: @box-size;
+        // background-color: red;
+        margin: none;
+        padding: none;
+    }
+
+    .table-leg{
+        width: 50%;
+        display: inline-block;
+    }
+    h4{
+        margin-bottom:0;
+        margin-top: 5px;
+    }
+}
+
+.health-table{
+    border-collapse: collapse;
+    tr,td{
+        margin: 0;
+        padding: 0;
+        line-height: 0px;
+    }
+    td{
+        border: 1px solid black;
+    }
+}

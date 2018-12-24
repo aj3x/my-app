@@ -3,8 +3,7 @@ import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 import Tooltip from 'rc-tooltip';
-import './PotentialSkills.css'
-import VisibleTab from './TabArchetype';
+import './PotentialSkillsLess.css'
 // import './up.png'
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
@@ -26,12 +25,17 @@ const handle = (props) => {
   };
 
 class PotentialSkills extends React.Component{
-    onSliderChange = (value)=>{
-        console.log(value);
-        this.props.setState({
-            value,
-        });
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.props.value
+    // }
+
+    // onSliderChange = (value)=>{
+    //     console.log(value);
+    //     this.props.setState({
+    //         value,
+    //     });
+    // }
 
     render(){
         const wrapperStyle = {};
@@ -49,15 +53,18 @@ class PotentialSkills extends React.Component{
               </Tooltip>
             );
         };
-
-        const out = this.props.stats.map((potential)=>{
+        var out = <p>EMPTY!</p>
+        // if(this.props.stats != null){
+            
+        out = this.props.stats.map((potential)=>{
             
             var potentialPow = <Slider 
                 min={0} 
                 max={10}
-                default={potential.value}
+                defaultValue={potential.value}
                 // handle={handle}
                 // onChange={this.onSliderChange}
+                // IDEA: Replace to be onAfterChange will save work
                 onChange={(value) => {
                     potential.value = value;
                     this.setState({
@@ -65,7 +72,6 @@ class PotentialSkills extends React.Component{
                     });
                 }}
             />
-            
             const skills = [];
             for(let i=0; i< potential.sub.length;i++){
                 let skill = potential.sub[i];
@@ -81,6 +87,7 @@ class PotentialSkills extends React.Component{
                         // handleStyle={{width:"20px", height:"40px"}}
                         min={0}
                         max={potential.value}
+                        defaultValue={skill[1]}
                         onChange={(value) => {
                             skill[1] = value;
                             this.setState({
@@ -115,12 +122,12 @@ class PotentialSkills extends React.Component{
             );
             
         });
+        // }
 
         return(
-            <VisibleTab 
-                visible={this.props.visible}
-                content={out}
-            />
+            <div>
+                {out}
+            </div>
         );
     }
 }

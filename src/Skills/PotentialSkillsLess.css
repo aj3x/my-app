@@ -1,0 +1,102 @@
+output,
+.potential-out {
+  color: red;
+}
+@font-face {
+  font-family: 'Kroftsmann';
+  src: url('/src/Fonts/Kroftsmann.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+.potential-out {
+  font-size: 2em;
+}
+.up-down button {
+  float: left;
+  text-align: left;
+  padding: none;
+  border: 2px black;
+}
+nav {
+  margin: 0;
+}
+nav ul {
+  padding-left: 0;
+  border-top: 2px solid #ff0000;
+  border-bottom: 2px solid #ff0000;
+}
+nav li {
+  display: inline-block;
+  list-style-type: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+nav a {
+  padding: 10px;
+}
+nav a:any-link {
+  color: #333;
+  text-decoration-line: none;
+}
+nav a:hover {
+  color: grey;
+  background-color: #eee;
+}
+input {
+  width: 2em;
+  font-size: 1.5em;
+  font-family: Kroftsmann;
+  border: inset;
+}
+.potential {
+  color: green;
+  font-size: 1.5em;
+}
+.section {
+  width: 120px;
+  padding: 20px;
+  margin: auto;
+  display: inline-block;
+}
+@media (max-width: 480px) {
+  .rc-slider {
+    height: 28px;
+    padding: 12px 0;
+    border-radius: 12px;
+  }
+  .rc-slider-handle {
+    width: 28px;
+    height: 28px;
+    margin-left: -14px;
+    margin-top: -10px;
+  }
+  .rc-slider-rail,
+  .rc-slider-track {
+    height: 8px;
+    border-radius: 12px;
+  }
+  .rc-slider-step {
+    height: 6px;
+  }
+}
+@media (min-width: 480px) {
+  .rc-slider {
+    height: 28px;
+    padding: 12px 0;
+    border-radius: 12px;
+  }
+  .rc-slider-handle {
+    width: 28px;
+    height: 28px;
+    margin-left: -14px;
+    margin-top: -10px;
+  }
+  .rc-slider-rail,
+  .rc-slider-track {
+    height: 8px;
+    border-radius: 12px;
+  }
+  .rc-slider-step {
+    height: 6px;
+  }
+}
