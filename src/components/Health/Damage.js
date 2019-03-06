@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row } from 'react-bootstrap'
+// import { Row } from 'react-bootstrap'
 import './Damage.css'
 import empty from './blank.png'
 import slash from './slash.png'
@@ -19,7 +19,7 @@ class Health extends React.Component{
 
     render(){
 
-        if(this.props.health == null){
+        if(this.props.health === null){
             return(<h1>EMPTY!</h1>);
         }else{
         return(
@@ -27,7 +27,7 @@ class Health extends React.Component{
                 <h1>Health</h1>
                 <div>
                 <HealthBox health={this.state.health} erase={this.state.erase}></HealthBox>
-                <div class="test" className={this.state.erase ? "test selected" : "test"} onClick={function(evt){
+                <div className={this.state.erase ? "test selected" : "test"} onClick={function(evt){
                     var erase = !this.state.erase
                     this.setState({
                         erase,
@@ -40,9 +40,6 @@ class Health extends React.Component{
 }
 
 class HealthBox extends React.Component{
-    constructor(props){
-        super(props);
-    }
     render(){
         function getImage(num){
             switch(num){
@@ -60,13 +57,14 @@ class HealthBox extends React.Component{
             var inner = []
             var divider = 2;
             
-            if(id == "head")
+            if(id === "head")
                 divider = 5;
-            else if(id == "body")
+            else if(id === "body")
                 divider = 4;
+            
             for (let index = 0; index < region.length; index++) {
                 var img = getImage(region[index])
-                inner.push(<td>
+                inner.push(<td key={id + " " + index}>
                     <img 
                     key={id + " " + index} 
                     src={img[0]} alt={img[1]}
@@ -83,20 +81,20 @@ class HealthBox extends React.Component{
                     }.bind(this)}
                     /></td>)
                 
-                if(index % divider == divider-1){
-                    outer.push(<tr>{inner}</tr>)
+                if(index % divider === divider-1){
+                    outer.push(<tr key={index}>{inner}</tr>)
                     inner = [];
                 }
             }
 
             var tableClass = ""
-            if(id == "lleg" || id == "rleg"){
+            if(id === "lleg" || id === "rleg"){
                 tableClass = "table-leg"
             }
             return (
-            <div class={tableClass}>
+            <div className={tableClass}>
                 <h4>{id}</h4>
-                <table class="health-table">
+                <table className="health-table">
                 <tbody>
                     {outer}
                 </tbody>
@@ -105,7 +103,7 @@ class HealthBox extends React.Component{
         })
         
         return(
-        <div class="health-box">
+        <div className="health-box">
         <table>
         <tbody>
             <tr>

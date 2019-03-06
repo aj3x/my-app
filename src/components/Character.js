@@ -1,6 +1,6 @@
 import React from 'react'
 // import { Row } from 'react-bootstrap';
-import './Character.css'
+import '../styles/Character.css'
 
 class Character extends React.Component{
     constructor(props){
@@ -47,7 +47,7 @@ class SelectChar extends React.Component{
             }}>
                 {Object.keys(this.props.characters).map((i) =>{
                     return(
-                        <option value={i}>{this.props.characters[i].page.taker}</option>
+                        <option key={i} value={i}>{this.props.characters[i].page.taker}</option>
                     );
                 })}
             </select>
@@ -64,7 +64,7 @@ class Info extends React.Component{
         var left = Object.entries(this.state).map(([i,value])=>{
             var label = [i]
             return (
-            <tr key="">
+            <tr key={i}>
                 <td>{i}:</td>
                 <td><input defaultValue={value}
                 onBlur={function (evt){
