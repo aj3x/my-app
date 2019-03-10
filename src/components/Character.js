@@ -1,33 +1,30 @@
 import React from 'react'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as characterActions from '../actions/actionTypes';
 // import { Row } from 'react-bootstrap';
 import '../styles/Character.css'
 
 class Character extends React.Component{
     constructor(props){
         super(props)
+        console.log(this.state)
     }
     
-
     render(){
-        var DEBUG = this.props.DEBUG;
         
         return( 
             <div>
                 <h1>Character Page</h1>
                 <SelectChar 
+                character={{
+                    selected: this.props.characters[0],
+                    onCharClick:(char) => this.props.clickChar(char)
+                }}
                 characters={this.props.characters}
-                curChar={this.props.currentChar}
-                clickChar={(char) => this.props.clickChar(char)}
                 >
                 </SelectChar>
-                <Info labels={this.props.label}
-                handleCharInfo={this.props.handleCharInfo}></Info>
-                <button onClick={()=>{
-                    console.log(this.props)
-                    console.log(this.props.DEBUG)
-                    console.log(this.state)
-                    
-                }}>Log</button>
+                <Info info={this.props.characters[0].info}></Info>
             </div>
         );
     }
@@ -38,16 +35,17 @@ class SelectChar extends React.Component{
         super(props)
     }
     render(){
-        var test = Object.keys(this.props.characters);
+        var test = Object.keys(this.props.character);
         // var out = <option value="red">Red</option><option value="green">Green</option>
         return(
-            <select id="charSelect" defaultValue={this.props.curChar} onChange={(evt)=>{
+            <select id="charSelect" defaultValue={this.props.character.selected} onChange={(evt)=>{
                 // this.props.clickChar(document.getElementById("charSelect").value);
-                this.props.clickChar(evt.target.value);
+                // this.props.character.onCharClick(evt.target.value);
+                console.log(evt.target.value)
             }}>
                 {Object.keys(this.props.characters).map((i) =>{
                     return(
-                        <option key={i} value={i}>{this.props.characters[i].page.taker}</option>
+                        <option key={i} value={i}>{this.props.characters[i].info.taker}</option>
                     );
                 })}
             </select>
@@ -57,19 +55,15 @@ class SelectChar extends React.Component{
 class Info extends React.Component{
     constructor(props){
         super(props)
-        this.state = this.props.labels
     }
 
     render(){
-        var left = Object.entries(this.state).map(([i,value])=>{
+        var left = Object.entries(this.props.info).map(([i,value])=>{
             var label = [i]
             return (
             <tr key={i}>
                 <td>{i}:</td>
-                <td><input defaultValue={value}
-                onBlur={function (evt){
-                    this.props.handleCharInfo(i,evt.target.value)
-                }.bind(this)}></input></td>
+                <td><input defaultValue={value}></input></td>
             </tr>)
         });
         
@@ -83,4 +77,19 @@ class Info extends React.Component{
     }
 }
 
-export default Character;
+function mapStateToProps(state){
+    return {
+        characters: state.characters
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        characterActions: bindActionCreators(characterActions, dispatch)
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+) (Character);

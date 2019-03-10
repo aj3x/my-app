@@ -57,7 +57,7 @@ class Navbar extends Component{
         <Router>
           <div>
           <nav>
-          <h2>{this.props.label.taker}</h2>
+          {/* <h2>{this.props.label.taker}</h2> */}
           <ul>
             {linkRoute}
           </ul>
@@ -66,14 +66,7 @@ class Navbar extends Component{
           {/* <Route path="/:id" component={Child}></Route> */}
           <Route exact path={pathHeader} component={this.Home}/>
           <Route path={pathHeader+links.character.page} component={function (){
-            return (<Character 
-              label={this.props.label}
-              currentChar={this.props.currentChar}
-              DEBUG={this.props.DEBUG}
-              clickChar={this.props.clickChar}
-              characters={this.props.characters}
-              handleCharInfo={this.props.handleCharInfo}></Character>)
-          }.bind(this)}/>
+            return <Character></Character>}}/>
           <Route path={pathHeader+links.skill.page} component={function (){
             return(<PotentialSkills stats = {this.props.stats}/>)
           }.bind(this)}/>
