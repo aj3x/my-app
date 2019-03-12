@@ -30,19 +30,13 @@ class Navbar extends Component{
           text:"Health",
         },
       };
+      /*
       const linkCode = Object.values(links).map((item) => {
         return(
           <button key={item.page} onClick={() => this.props.onClick(item.page)}>{item.text} </button>
         );
       });
-      
-      const Child = ({ match }) => (
-        <div>
-          <h3>ID: {match.params.id}</h3>
-          {/* {this.props.clickLink(match.params.id)} */}
-          {this.test(match.params.id)}
-        </div>
-      );
+      */
   
       const linkRoute = Object.values(links).map((item) => {
         return(

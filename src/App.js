@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/Navbar'
-import logo from './logo.svg';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addUser } from './actions/actions'
-import {initialState} from './reducers/initialState';
 import {saveStore} from './store/localStore';
 require('react-bootstrap');
 
+/*
 class NameForm extends Component {
   constructor(props){
     super(props);
@@ -38,6 +37,7 @@ class NameForm extends Component {
     );
   }
 }
+*/
 
 class App extends Component {
   constructor(props) {
@@ -51,7 +51,6 @@ class App extends Component {
    * Returns currently selected characters stats
    */
   getCharacter(){
-    console.log(this)
     return this.props.characters[0];
     // return this.state.characters[this.state.currentChar];
   }
@@ -129,14 +128,12 @@ class App extends Component {
         <Navbar 
           stats={this.getCharacter().stats}
           health={this.getCharacter().health}
-          label={this.getCharacter().page}
           characters={this.props.characters}
           clickChar={char => this.handleCharSelect(char)}
-          handleCharInfo={(key,info) => this.handleCharInfo(key,info)}
           clickLink={link => this.handleNav(link)}
         />
 
-        <button onClick={() => saveStore()}>Save</button>
+        <button onClick={() => saveStore(this.props.characters)}>Save</button>
         <button onClick={() => this.unsave()}>Delete</button>
         <button onClick={() => this.addCharacter("new")}>Add Character</button>
         <button onClick={() => this.DEBUG()}>DEBUG</button>

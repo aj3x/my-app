@@ -1,5 +1,7 @@
-export const DAMAGE = 'DAMAGE';
 export const FETCH_STUFF = 'FETCH_STUFF';
 export const RECEIVE_STUFF = 'RECEIVE_STUFF';
-export const EDIT_CHARACTERS = 'EDIT_CHARACTERS';
+export const DAMAGE_HEALTH = 'DAMAGE_HEALTH';
+export const EDIT_CHARACTER = 'EDIT_CHARACTER';
 export const ADD_CHARACTER = 'ADD_CHARACTER';
+export const SELECT_CHARACTER = 'SELECT_CHARACTER';
+

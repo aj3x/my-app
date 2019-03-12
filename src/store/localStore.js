@@ -1,12 +1,17 @@
 
 const masterkey = "aj3xredmarketsreact";
 
-function loadStore(){
-  this.state.characters = JSON.parse(localStorage.getItem(masterkey));
+export function loadStore(){
+  let store = localStorage.getItem(masterkey);
+  if(store === "undefined"){
+    return undefined;
+  }else{
+    return JSON.parse(localStorage.getItem(masterkey));
+  }
 }
-export function saveStore(){
-  localStorage.setItem(masterkey,JSON.stringify(this.state.characters));
+export function saveStore(characters){
+  localStorage.setItem(masterkey,JSON.stringify(characters));
 }
-function unsaveStore(){
+export function unsaveStore(){
   localStorage.removeItem(masterkey);
 }

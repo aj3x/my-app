@@ -1,16 +1,15 @@
 import { createStore } from 'redux';
 import rootReducer from '../reducers/rootReducer'
+import {initLoad} from '../reducers/initialState';
 // import thunk from 'redux-thunk';
-
-import initialState from '../reducers/initialState';
 
 export default function configureStore() {
 
     
     return createStore(
         rootReducer,
-        window.devToolsExtension && window.devToolsExtension(),
-        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+        initLoad(),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
         // applyMiddleware()
     );
 }

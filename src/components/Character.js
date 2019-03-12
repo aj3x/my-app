@@ -6,10 +6,6 @@ import * as characterActions from '../actions/actionTypes';
 import '../styles/Character.css'
 
 class Character extends React.Component{
-    constructor(props){
-        super(props)
-        console.log(this.state)
-    }
     
     render(){
         
@@ -31,11 +27,7 @@ class Character extends React.Component{
 }
 
 class SelectChar extends React.Component{
-    constructor(props){
-        super(props)
-    }
     render(){
-        var test = Object.keys(this.props.character);
         // var out = <option value="red">Red</option><option value="green">Green</option>
         return(
             <select id="charSelect" defaultValue={this.props.character.selected} onChange={(evt)=>{
@@ -53,28 +45,25 @@ class SelectChar extends React.Component{
     }
 }
 class Info extends React.Component{
-    constructor(props){
-        super(props)
-    }
 
-    render(){
-        var left = Object.entries(this.props.info).map(([i,value])=>{
-            var label = [i]
-            return (
-            <tr key={i}>
-                <td>{i}:</td>
-                <td><input defaultValue={value}></input></td>
-            </tr>)
-        });
-        
-        return(
-            <table className="list">
-            <tbody>
-                {left}
-            </tbody>
-            </table>
-        );
-    }
+  render(){
+    var left = Object.entries(this.props.info).map(([label,value])=>{
+      return (
+        <tr key={label}>
+          <td>{label}:</td>
+          <td><input defaultValue={value}></input></td>
+        </tr>
+      )
+    });
+    
+    return(
+      <table className="list">
+      <tbody>
+        {left}
+      </tbody>
+      </table>
+    );
+  }
 }
 
 function mapStateToProps(state){

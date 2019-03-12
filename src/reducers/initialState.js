@@ -1,3 +1,4 @@
+import {loadStore} from '../store/localStore';
 export function initChar(){
     var out = {
       info:{
@@ -10,7 +11,7 @@ export function initChar(){
       stats: [{
           id: "STR",
           name: "Strength",
-          value: 0,
+          value: 1,
           load: 0,
           sub: [
             ["Unarmed", 0],
@@ -21,7 +22,7 @@ export function initChar(){
         {
           id: "SPD",
           name: "Speed",
-          value: 0,
+          value: 1,
           sub: [
             ["Shoot", 0],
             ["Stealth", 0],
@@ -31,7 +32,7 @@ export function initChar(){
         {
           id: "ADP",
           name: "Adaptability",
-          value: 0,
+          value: 1,
           sub: [
             ["Awareness", 0],
             ["Self-Control", 0],
@@ -43,7 +44,7 @@ export function initChar(){
         {
           id: "INT",
           name: "Intelligence",
-          value: 0,
+          value: 1,
           sub: [
             ["Foresight", 0],
             ["Research", 0],
@@ -55,7 +56,7 @@ export function initChar(){
         {
           id: "CHA",
           name: "Charisma",
-          value: 0,
+          value: 1,
           sub: [
             ["Networking", 0],
             ["Persuasion", 0],
@@ -68,7 +69,7 @@ export function initChar(){
         {
           id: "WIL",
           name: "Will Power",
-          value: 0,
+          value: 1,
           sub: [],
         },
       ],
@@ -81,6 +82,11 @@ export function initChar(){
         lleg:[],
         rleg:[],
       },
+      humanity:{
+        detachment: 0,
+        stress: 0,
+        trauma: 0,
+      }
     }
     
 
@@ -101,7 +107,19 @@ export function initChar(){
 
 
 export function initLoad(){
-    let state = {};
+    let state={
+      characters: [],
+      currentChar: 0,
+    };
+
+    let characters = loadStore();
+
+    if(characters === undefined){
+      state.characters = [initChar()];
+    }else{
+      state.characters = characters;
+    }
+    return state;
 
     
     // this.state={
