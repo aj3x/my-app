@@ -1,43 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
 import Navbar from './components/Navbar'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addUser } from './actions/actions'
-import {saveStore} from './store/localStore';
+import { addCharacter, selectCharacter, editCharacterThreat } from './actions/actions'
+import {saveStore, unsaveStore} from './store/localStore';
+
+import UITest from './components/UITest';
+import './App.scss';
 require('react-bootstrap');
 
-/*
-class NameForm extends Component {
-  constructor(props){
-    super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleChange(event){
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event){
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  render(){
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange}/>
-        </label>
-      </form>
-    );
-  }
-}
-*/
 
 class App extends Component {
   constructor(props) {
@@ -51,14 +23,8 @@ class App extends Component {
    * Returns currently selected characters stats
    */
   getCharacter(){
-    return this.props.characters[0];
-    // return this.state.characters[this.state.currentChar];
+    return this.props.characters[this.props.character];
   }
-
-  /**
-   * returns initial xml for new character
-   * @param {string} name Save name
-   */
   
 
   /**
@@ -72,48 +38,13 @@ class App extends Component {
     }
     return key;
   }
-
-  addCharacter(name) {
-    // console.log("key:"+key)
-    var tempChar = this.state.characters;
-    tempChar[this.getKey(name)]= this.initChar(name)
-    // var lolz = {characters:{ [this.getKey(name)]: this.initChar(name) }}
-    this.setState({
-      characters: tempChar,
-      currentChar: name,
-    })
-  }
-
-  handleNav(link){
-    this.setState({
-      navpage: link,
-    });
-  }
-  handleCharSelect(char){
-    this.setState({
-      currentChar: char,
-    })
-  }
-  handleCharInfo(key,info){
-    var tempChar = this.state.characters;
-    tempChar[this.state.currentChar].page[key] = info;
-    this.setState({
-      characters: tempChar,
-    })
-  }
- 
-  contact(enable){
-    this.setState({
-      contactIsOpen: enable,
-    });
-  }
-  DEBUG(){
-    console.log(this.state);
-  }
   
 
   onAddUser(event){
     this.props.onAddUser(event.target.value)
+  }
+  handleSelect = (char) => {
+    this.props.onSelectCharacter(char);
   }
 
   
@@ -123,32 +54,36 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Red Markets App</h1>
+          {/* TODO: Change app to go back to home */}
           <button onClick={this.onAddUser}>REDUX DEBUG</button>
+          <UITest></UITest>
         </header>
+        
+        <select id="char-select" defaultValue={String(this.props.character)} onChange={(evt)=>{
+          this.handleSelect(Number(evt.target.value));
+        }}>
+          {Object.keys(this.props.characters).map((i) =>{
+            return(
+              <option key={i} value={i}>{this.props.characters[i].info.taker}</option>
+            );
+          })}
+        </select>
+        
         <Navbar 
           stats={this.getCharacter().stats}
           health={this.getCharacter().health}
           characters={this.props.characters}
-          clickChar={char => this.handleCharSelect(char)}
-          clickLink={link => this.handleNav(link)}
         />
+        
+        
 
         <button onClick={() => saveStore(this.props.characters)}>Save</button>
-        <button onClick={() => this.unsave()}>Delete</button>
-        <button onClick={() => this.addCharacter("new")}>Add Character</button>
+        <button onClick={() => unsaveStore()}>Delete</button>
+        <button onClick={() => this.props.onAddUser("new")}>Add Character</button>
         <button onClick={() => this.DEBUG()}>DEBUG</button>
 
-        {/* <div style={this.state.contactIsOpen ? {}:{display:"none"}}>
-          You did it!
-          <a onClick={()=>this.contact(false)}>
-          <div className="noselect" style={{height:"100px",width:"100px",background:"red"}}>
-            <p>close</p>
-          </div>
-          </a>
-        </div> */}
-
         <footer>
-          <a className="noselect" onClick={()=>this.contact(true)}>Contact Me</a>
+          {/* <a className="noselect" onClick={()=>this.contact(true)}>Contact Me</a> */}
         </footer>
         <p className="App-intro">
         </p>
@@ -159,13 +94,16 @@ class App extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    characters: state.characters
+    characters: state.characters,
+    character: state.character,
   }
 }
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onAddUser: addUser
+    onAddUser: addCharacter,
+    onSelectCharacter: selectCharacter,
+    editThreats: editCharacterThreat,
   }, dispatch);
 }
 

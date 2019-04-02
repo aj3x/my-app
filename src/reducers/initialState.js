@@ -1,4 +1,32 @@
 import {loadStore} from '../store/localStore';
+
+/**
+ * returns initial xml for new character
+ * @param {string} name Save name
+ */
+
+ function initHealth(){
+   let health = {
+    head:[],
+    larm:[],
+    body:[],
+    rarm:[],
+    lleg:[],
+    rleg:[],
+   };
+  for (let i = 0; i < 20; i++) {
+    if(i < 10){
+        health.head[i] = 0;
+        health.larm[i] = 0;
+        health.rarm[i] = 0;
+        health.lleg[i] = 0;
+        health.rleg[i] = 0;
+    }
+    health.body[i] = 0;  
+  }
+  return health;
+ }
+
 export function initChar(){
     var out = {
       info:{
@@ -12,7 +40,6 @@ export function initChar(){
           id: "STR",
           name: "Strength",
           value: 1,
-          load: 0,
           sub: [
             ["Unarmed", 0],
             ["Melee", 0],
@@ -74,33 +101,15 @@ export function initChar(){
         },
       ],
 
-      health: {
-        head:[],
-        larm:[],
-        body:[],
-        rarm:[],
-        lleg:[],
-        rleg:[],
-      },
-      humanity:{
+      health: initHealth(),
+
+      threats:{
         detachment: 0,
         stress: 0,
         trauma: 0,
       }
     }
-    
 
-
-    for (let i = 0; i < 20; i++) {
-      if(i < 10){
-          out.health.head[i] = 0;
-          out.health.larm[i] = 0;
-          out.health.rarm[i] = 0;
-          out.health.lleg[i] = 0;
-          out.health.rleg[i] = 0;
-      }
-      out.health.body[i] = 0;  
-    }
 
     return out
 }
@@ -109,7 +118,6 @@ export function initChar(){
 export function initLoad(){
     let state={
       characters: [],
-      currentChar: 0,
     };
 
     let characters = loadStore();
@@ -136,6 +144,6 @@ export function initLoad(){
 
 export default {
     stuff: [],
-    currentChar: 0,
-    characters: [initChar()]
+    character: 0,
+    characters: [initChar()],
 };

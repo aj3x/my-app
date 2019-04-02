@@ -24,11 +24,32 @@ import * as types from './actionTypes';
 //   };
 // }
 
-export function addUser() {
+export function addCharacter() {
   return {
     type: types.ADD_CHARACTER,
     payload: {
 
     }
+  }
+}
+
+export function selectCharacter(character) {
+  return{
+    type: types.SELECT_CHARACTER,
+    payload: character,
+  }
+}
+
+export function editCharacterInfo(characters) {
+  return{
+    type: types.EDIT_CHARACTER_INFO,
+    payload: characters
+  }
+}
+
+export function editCharacterThreat(id, threats) {
+  return {
+    type: types.EDIT_CHARACTER_THREATS,
+    payload: {id, threats}
   }
 }

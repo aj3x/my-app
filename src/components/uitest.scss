@@ -1,0 +1,25 @@
+.test-block{
+  background-color: fuchsia;
+  color: black;
+  
+  select{
+    border-color: transparent transparent rgba(0,0,0,0.1) transparent;
+    cursor: pointer;
+    color:white;
+    background-color: dodgerblue;
+    border-radius: 4px;
+    padding:3px;
+
+    img{
+      padding: 10px;
+    }
+  }
+}
+
+
+// .test-block select *{
+//   color:green;
+//   background-color: red;
+//   padding-left: 20px;
+//   margin-left: 20px;
+// }

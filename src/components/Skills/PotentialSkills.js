@@ -3,7 +3,8 @@ import Slider, {Handle} from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 import Tooltip from 'rc-tooltip';
-import './PotentialSkillsLess.css'
+import './PotentialSkills.scss'
+// import './PotentialSkillsLess.css'
 // import './up.png'
 
 
@@ -52,7 +53,7 @@ class PotentialSkills extends React.Component{
                 onChange={(value) => {
                     potential.value = value;
                     this.setState({
-                        potential,
+                        potential
                     });
                 }}
             />

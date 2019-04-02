@@ -1,0 +1,16 @@
+.list {
+  // font-family: 'Courier New', Courier, monospace;
+  list-style-position: outside;
+  list-style: none;
+  text-align: left;
+  font-size: 0.7em;
+  td{
+      font-size: 2em;
+      
+      input{
+          font-family: 'Courier New', Courier, monospace;
+          font-size: 0.8em;
+          width: 100%;
+      }
+  }
+}

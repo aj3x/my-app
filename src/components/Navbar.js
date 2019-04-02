@@ -65,7 +65,7 @@ class Navbar extends Component{
             return(<PotentialSkills stats = {this.props.stats}/>)
           }.bind(this)}/>
           <Route path={pathHeader+links.health.page} component={function() {
-            return(<Damage health = {this.props.health}/>)
+            return(<Damage health={this.props.health}/>)
             }.bind(this)}/>
             </div>
         </Router>
